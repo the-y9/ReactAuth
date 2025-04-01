@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 import { addUser, initialState } from "../store/authSlice";
 
 const users = [
-  {"username": "1"},
-  {"username": "2"},
-  {"username": "3"},
+  {"username": "1", "password":"1"},
+  {"username": "q", "password":"2"},
+  {"username": "xyz", "password":"abc"},
   
 ]
 
@@ -21,10 +21,14 @@ export default function Login(){
   function handleLogin(event){
     event.preventDefault();
 
-    const un = users.find((user) => user.username === username);
+    const un = users.find((user) => (user.username === username));
     if (un){
-    dispatch(addUser({"username": username}))
-    navigate("/dashboard");
+      if (un.password === password){
+        dispatch(addUser({"username": username}))
+        navigate("/dashboard");
+      }else{
+        setError("Wrong Password!")
+      }
   }else{
     setError("User Not Found!");
   }
