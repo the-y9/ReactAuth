@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Spinner } from "react-bootstrap";
 import Logout from "./Logout";
+import Home from "./Home";
 
 export default function Dashboard() {
     const user = useSelector((state) => state.auth.user);
@@ -15,7 +16,7 @@ export default function Dashboard() {
             </Container>
         );
     }
-
+    if (user){
     return (
         <Container>
                     <h1>Dashboard</h1>
@@ -25,4 +26,6 @@ export default function Dashboard() {
                     <Logout />
         </Container>
     );
+    }
+    return <Home />
 }
